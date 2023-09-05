@@ -1,0 +1,44 @@
+(use-modules (ice-9 textual-ports)
+             (ice-9 match)
+             (srfi srfi-1)
+             (srfi srfi-2)
+             (srfi srfi-13)
+             (srfi srfi-27)
+             (srfi srfi-28)
+             (srfi srfi-43)
+             (srfi srfi-60)
+             (srfi srfi-69))
+
+(define (fib-mod m)
+  (define cache (make-hash-table))
+  (define (f n)
+    (cond
+     ((= n 0) 0)
+     ((= n 1) 1)
+     (else
+      (hash-table-ref
+       cache n
+       (lambda ()
+         (let ((r (modulo (+ (f (- n 1)) (f (- n 2))) m)))
+           (hash-table-set! cache n r)
+           r))))))
+  f)
+
+(define (solve n)
+  (define g (fib-mod n))
+  (define (f i)
+    (if (zero? (modulo (g i) n))
+        i
+        (f (1+ i))))
+  (f 1))
+
+(define (input)
+  (map string->number
+       (cdr
+        (string-tokenize
+         (get-string-all (current-input-port))))))
+
+(display (string-join
+          (map (compose number->string solve) (input))
+          " "))
+(newline)
