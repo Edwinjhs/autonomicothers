@@ -1,0 +1,28 @@
+let printArray arr = Array.iter (Printf.printf "%i ") arr;;
+let num= ref 0 ;;        
+let inp=[[1278;6844];[14;54];[104;488];[104;584];[9670;45366];[58;112];[162;774];[68;208];[90;330];[36;68];[692;4484];[702;3922];[118;430];[34;54]];;
+let nres maxpig legs breast =
+    for i=1 to int_of_float maxpig     do
+              let m=(legs-(i*4))/2 in
+                if m > 0 then    
+                    begin
+                    let pcer = (((float_of_int breast)-.(float_of_int legs))+.((float_of_int i)*.4.0))/.(float_of_int i) in
+                       if (pcer-.(floor(pcer +. 0.5)))=0.0 then
+                            begin
+                                if (int_of_float pcer mod 2) =0 then
+                                    begin
+                                        num := 1 + !num;
+                                    end
+                         end
+                end
+        done;;
+
+for j=0 to List.length inp -1 do 
+    num :=0;
+    let legs= (List.nth (List.nth inp (j)) 0) in
+    let breast=(List.nth (List.nth inp (j)) 1) in
+  let maxpig= (floor((float_of_int legs/.4.0) +. 0.5)) in
+    nres maxpig legs breast;
+    print_int !num;
+    print_string " ";
+done;
