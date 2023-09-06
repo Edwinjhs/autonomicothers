@@ -1,0 +1,40 @@
+(define (get-len)
+  (let ((len (read)))
+    (vector len)))
+
+(define (get-data)
+  (let ((legs (read))
+        (breast (read)))
+    (vector legs breast)))
+
+(define (pigs remLegs remBreast)
+  (define pig (floor(/ remLegs 4)))  
+  (if (and (> pig 0) (exact-integer?(/ remBreast pig)) (even?(/ remBreast pig)) )
+      1
+      0))
+
+(define (counts legs breast idex solu)
+  (define remLegs (- legs (* 2 idex)))
+  (define remBreast (- breast (* 2 idex)))
+  (if (< idex (floor (+ (/ legs 2) 1)))
+      (if (not (= (modulo remLegs 4) 0))
+           (counts legs breast (+ idex 1) solu)
+           (counts legs breast (+ idex 1) (+ solu (pigs remLegs remBreast))))
+      solu))
+
+(define (run leng)
+  (let ((data (get-data)))
+    (let ((legs (vector-ref data 0))
+          (breast (vector-ref data 1)))
+    (display (counts legs breast 1 0))
+    (display " ")
+    (if (> leng 1)
+        (run (- leng 1))
+        (= leng 1)))))
+
+(define (main)
+  (let ((len(get-len)))
+    (let ((leng (vector-ref len 0)))
+    (run leng))))
+
+(main)
