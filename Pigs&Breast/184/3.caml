@@ -1,0 +1,27 @@
+/*
+  Language: ReasonML
+  $ ocamlc -o jandresh -pp "refmt -p ml" -impl jandresh.re
+*/
+let main = () => {
+  let qty = int_of_string(input_line(stdin))
+  let index = Array.init(qty, var_i => var_i)
+  let string = Array.map(var_i => input_line(stdin), index)
+  let string_lst = Array.map(var_i => String.split_on_char(' ', var_i), string)
+  let data = Array.map(
+    var_i => [
+      int_of_string(List.nth(var_i, 0)), 
+      int_of_string(List.nth(var_i, 1))], 
+    string_lst)
+  let output_lst = Array.map(
+    var_i => List.nth(string_lst[var_i], 2) == "n" ?
+      List.nth(data[var_i], 0) mod (List.nth(data[var_i], 1) + 1) :
+      List.nth(data[var_i], 0) mod (List.nth(data[var_i], 1) + 1) == 0 ?
+        List.nth(data[var_i], 1) :
+        List.nth(data[var_i], 0) mod (List.nth(data[var_i], 1) + 1) - 1, 
+    index)
+  let print = Array.to_list(
+    Array.map(var_i => string_of_int(var_i), output_lst))
+  Printf.printf("%s", String.concat(" ", print)) 
+}
+
+main()
