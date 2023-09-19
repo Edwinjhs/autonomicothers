@@ -1,0 +1,7 @@
+x <- scan("text.txt")
+
+z <- seq(from = 1, to = length(x), by = 3)
+for (i in z){
+  y <- min(min(x[i],x[i+1]), x[i+2])
+  cat(paste(" ", y))
+}
