@@ -1,0 +1,37 @@
+import strutils
+
+proc getDataInput(): seq[string] =
+  result = @[]
+  var f: File
+  if open(f, "datainput.txt"):
+    result.add(f.readLine()) # Anzahl Daten zum einlesen
+    for i in 1..parseInt(result[0]):
+      result.add(f.readLine()) # Liest die restlichen daten ein
+    close(f)
+
+proc minimumOfThree(input: seq[string]): void =
+  var dataCount = parseInt(input[0])
+
+  for i in 1..dataCount:
+    let nums = input[i].split()
+    let a = parseInt(nums[0])
+    let b = parseInt(nums[1])
+    let c = parseInt(nums[2])
+    var minVal = 0
+
+    if a < b:
+      if a < c:
+        minVal = a
+      else:
+        minVal = c
+    else:
+      if b < c:
+        minVal = b
+      else:
+        minVal = c
+
+    stdout.write(minVal, " ")
+  echo("")
+
+let input = getDataInput()
+minimumOfThree(input)
