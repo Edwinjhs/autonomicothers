@@ -1,0 +1,10 @@
+input n
+for i = 1 to n:
+input a
+input b
+input c
+m = a
+if b<m then m = b
+if c<m then m = c
+print m, " "
+next i
