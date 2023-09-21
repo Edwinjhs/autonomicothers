@@ -1,0 +1,16 @@
+clc
+clear
+
+function b = triangles (t)
+  c = sort(t.')
+  d = c.'
+  e =(d(:,1).+d(:,2))
+  [m n]= size(e)
+  for i = 1:m
+    if [e(i,1)] < [d(i,3)]
+      disp('0')
+    else
+      disp('1')
+    endif
+  endfor
+endfunction
