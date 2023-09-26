@@ -1,0 +1,30 @@
+[indent = 2]
+
+def remove_special_characteres(text: string): string
+  cleaned_text: string = ""
+  var regex = new Regex("[a-zA-Z]") 
+  for var i = 0 to text.length
+    var char = text[i].to_string()
+    if regex.match(char)
+      cleaned_text += char
+  return cleaned_text
+
+def is_palindrome(texts: string, rPhrase:string):string
+  var length = texts.length
+  for var i = 0 to (length / 2)
+    if texts[i] != rPhrase[i]
+    return "N"
+  return "Y"
+
+init 
+  num_cases: int = int.parse(stdin.read_line())
+
+  texts: array of string = new array of string[num_cases]
+  rPhrase : array of string = new array of string[num_cases]
+
+  for var i = 0 to (num_cases - 1)
+    var line = stdin.read_line().down()
+    texts[i] = remove_special_characteres(line)
+    rPhrase[i] = remove_special_characteres(line.reverse())
+    var palindrome_check = is_palindrome(texts[i], rPhrase[i])
+    print palindrome_check
