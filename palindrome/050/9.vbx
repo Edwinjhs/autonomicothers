@@ -1,0 +1,24 @@
+def is_palindrome($strings_chars):
+  if ($strings_chars | length) < 2 then "Y"
+  else
+    if $strings_chars[0] != $strings_chars[-1] then "N"
+    else
+      is_palindrome($strings_chars[1:-1])
+    end
+  end;
+
+def main:
+  if length < 1 then empty
+  else
+    .
+    | split("\n")[1:-1]
+    | map(split(""))
+    | map(map(select(test("\\w"; "ix"))))
+    | map(map(ascii_downcase))
+    | map(is_palindrome(.))
+    | join(" ")
+  end;
+
+main
+
+# cat DATA.lst | jq -Rs -j -f 050.jq
