@@ -1,0 +1,7 @@
+function p=palindrome(q) 
+if q==flip(q)
+display('Y')
+else
+display('N')
+endif
+endfunction
