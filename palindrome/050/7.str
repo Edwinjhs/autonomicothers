@@ -1,0 +1,20 @@
+function ispalindrome(str)
+    # holds the solution
+    solution = String[]
+    # convert to lowercase
+    str = lowercase(str)
+    # remove spaces, and all kinds of punctiation syntax
+    str = replace(str, [' ',',','.','?','!',':',';','-'], "")
+    # split each string into substrings on occurence of the newline character
+    substrings = split(str, ['\n'])
+    # loop through substrings to determine if palindrom
+    for i = 1:length(substrings)
+        temp = substrings[i]
+        if temp == reverse(temp)
+            push!(solution, "Y")
+        else
+            push!(solution, "N")
+        end
+    end
+    solution
+end
