@@ -1,0 +1,29 @@
+use strict;
+use warnings;
+
+print "Your Input: ";
+my @in = <STDIN>;
+shift(@in);
+my @hold;
+my @value;
+my $backwards;
+my $forwards;
+my $r;
+my @reggy;
+
+foreach (@in){
+        (@reggy) =  $_ =~ /(\w+)/g;
+        $backwards = lc join("", @reggy);
+        $forwards = reverse($backwards);
+        if($backwards eq $forwards){
+                $r = "Y ";
+        } else{
+                $r = "N ";
+        }
+        push(@hold, $r);
+}
+
+foreach (@hold){
+        print "$_ ";
+}
+print "\n";
