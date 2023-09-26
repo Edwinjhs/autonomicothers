@@ -1,0 +1,9 @@
+function T=palindrome(b)
+%b hanya memuat 1 jenis huruf (kapital/tidak kapital
+%b tidak memuat simbol
+  if b==flip(b)
+    disp ('Y')
+  else 
+    disp ('N')
+  endif
+endfunction
