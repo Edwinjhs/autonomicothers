@@ -1,0 +1,62 @@
+Answer=
+Data=
+(
+20
+M-oihzh, a, Ei iipra Arp-Iiieahzh-Iom
+Wtalaxqlbduoebwtistwbeoudblqxalat w
+Tygadrojun enojorda G, yt
+Yuvcxuwh, arfd, Gcoyxiz Ptmyymtpz, Ixy o, cgdfr-Jhwuxcv, uy
+Ofiut-Ruxgwssxoeodoorrx-bdeedbx, rrood, oeoxsswg-Xu Rtu If-O
+Ceoa W U, cc u, Wao-ec
+M-qvhio, au-jx Otbcbto ju Aoihvqm
+Gu u Z Eaqpcgaou-Gw, Eewguoa Gcp, Qa ezuug
+Ybi, Cqjyxiuilfu-Ayyaufliu ixyjqciby
+Ai uhvso, Qt A Uamudaqiurydnynd-yr, Ui, qa dumau, Ayq-Osvhuia
+Oolkupoctpptco-Pukroo
+A-otise io-iesit Oa
+Kca, I-ubo rzvvn-ro, bui-ac k
+oonyor yaiscffcsiayroynoi
+B, Oaybx, F-yqnsoloteuuetolosnq-yfxby, ao B
+I-Aaaqihyyhlqaa-Ai
+Fxcpymi, vd, boobdvimy, pcxf
+Nbv, be-y u, dd-Uee-Bvb, n
+Euitau ckt Onqlyynlsi-Nislnyylqnotk, muatiu, e
+Yoebiqwmte-O-onooe Tm, W-Q, Ime O, Y
+)
+for key, val in StrSplit(Data,"`n")
+{
+    if key=1
+        continue
+    is_identical:=True
+    arr1:=[]
+    arr2:=[]
+    for pos, char in StrSplit(val)
+    {
+        If !(RegExMatch(char,"\w"))
+            continue
+        else
+        {
+            arr1.Push(Format("{:U}",char))
+            arr2.InsertAt(1,Format("{:U}",char))
+        }
+    }
+    If (arr1.Count() <> arr2.Count())
+    {
+        is_identical:=False
+    }
+    else
+    {
+        for a, b in arr1
+        {
+            if arr1[a] <> arr2[a]
+                is_identical:=False
+        }
+    }
+    If (is_identical)
+        Answer .= "Y "
+    else
+        Answer .= "N "
+}
+Clipboard := RTRim(Answer)
+DebugWindow("`n" Clipboard "`n")
+return
