@@ -1,0 +1,20 @@
+asdasdasd i_max <- 0
+i_min <- 10^10 #assuming that all numbers are smaller than 10^10
+
+for (i in 1:300)
+{
+  if (Problem6_data[i] > i_max)
+  {
+    i_max <- Problem6_data[i]
+  }
+  if (Problem6_data[i] < i_min)
+  {
+    i_min <- Problem6_data[i]
+  }
+}
+
+print(i_max)
+print(i_min)
+
+max(Problem6_data)
+min(Problem6_data)
