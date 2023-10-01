@@ -1,0 +1,36 @@
+(define (get-len)
+  (let ((len (read)))
+    (vector len)))
+
+(define (get-data)
+  (let ((numA (read))
+        (numB (read)))
+    (vector numA numB)))
+
+(define (factorial valueA valueB)
+  (if (or (<= valueA 1) (<= valueA valueB))
+       1
+       (* valueA (factorial (- valueA 1) valueB))))
+
+(define (combinations numA numB less)
+  (if (> less numB)
+      (/ (factorial numA (- numA numB)) (factorial numB 1))
+      (/ (factorial numA (- numA less)) (factorial less 1))))
+
+(define (run leng)
+  (let ((data (get-data)))
+    (let ((numA (vector-ref data 0))
+          (numB (vector-ref data 1)))
+    (define less(- numA numB))
+    (display (combinations numA numB less))
+    (display " ")
+    (if (> leng 1)
+        (run (- leng 1))
+        (= leng 1)))))
+
+(define (main)
+  (let ((len(get-len)))
+    (let ((leng (vector-ref len 0)))
+    (run leng))))
+
+(main)
