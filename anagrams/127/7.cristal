@@ -1,0 +1,68 @@
+! /usr/bin/crystal
+
+# $ ameba slayfer1112.cr
+# Inspecting 1 file.
+# .
+# Finished in 5.74 milliseconds
+# $ crystal build slayfer1112.cr
+
+def data_entry()
+  data = File.read("DATA.lst")
+  values = [] of Array(String)
+  data.each_line do |x|
+    inter = [] of String
+    (x.split("")).each do |y|
+
+      inter << y
+    end
+    values << inter
+  end
+  values[1..]
+end
+
+def dicc_entry()
+  data = File.read("words.txt")
+  values = [] of Array(String)
+  data.each_line do |x|
+    inter = [] of String
+    (x.split("")).each do |y|
+      inter << y
+    end
+    values << inter
+  end
+  values
+end
+
+def solution(array, dicc)
+  array.sort!
+  array = array.join
+  counter = 0
+  dicc.each do |x|
+    x = x.sort
+    x = x.join
+    if x == array
+      counter += 1
+    end
+  end
+
+  counter -= 1
+
+  print "#{counter} "
+end
+
+data = data_entry()
+words = dicc_entry()
+data.each do |x|
+  dicc = [] of Array(String)
+  words.each do |y|
+    if x.size == y.size
+      dicc << y
+    end
+  end
+  solution(x, dicc)
+  dicc = [] of Array(String)
+end
+puts
+
+# $ ./slayfer1112
+# <Result>
