@@ -1,0 +1,37 @@
+OPEN "c:\qb64\cabby\p127.txt" FOR OUTPUT AS #1
+DEFLNG A-Z
+READ n
+FOR a = 1 TO n
+    READ w$
+    GOSUB sums
+    w1$ = w$: s1p = s1: s2p = s2
+    OPEN "c:\qb64\cabby\words.txt" FOR INPUT AS #2
+    DO WHILE EOF(2) = 0
+        LINE INPUT #2, w$
+        IF LEN(w$) = LEN(w1$) THEN
+            GOSUB sums
+            IF s1p = s1 AND s2p = s2 THEN count = count + 1
+        END IF
+    LOOP
+    CLOSE 2
+    PRINT #1, count - 1;
+    count = 0
+NEXT a
+CLOSE: END
+sums:
+s1 = 0: s2 = 0
+FOR b = 1 TO LEN(w$)
+    c = ASC(MID$(w$, b, 1))
+    s1 = s1 + c
+    s2 = s2 + c ^ 3
+NEXT b
+RETURN
+
+DATA 7
+DATA "aridest"
+DATA "severer"
+DATA "maliced"
+DATA "alerting"
+DATA "takings"
+DATA "reward"
+DATA "redraws"
