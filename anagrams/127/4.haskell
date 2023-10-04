@@ -1,0 +1,9 @@
+import Data.List
+
+anacount s arr = (\x -> x - 1) $ length $ filter (\i -> sort i == s) arr
+
+main = do
+  n <- readFile "words.txt"
+  let arr = lines n
+  df <- getLine
+  mapM_ (print . (\i -> anacount (sort i) arr)) (words df)
