@@ -1,0 +1,43 @@
+(use-modules (ice-9 textual-ports)
+             (ice-9 match)
+             (ice-9 curried-definitions)
+             (srfi srfi-1)
+             (srfi srfi-2)
+             (srfi srfi-9)
+             (srfi srfi-13)
+             (srfi srfi-26)
+             (srfi srfi-27)
+             (srfi srfi-28)
+             (srfi srfi-43)
+             (srfi srfi-60)
+             (srfi srfi-69))
+
+(define words
+  (string-tokenize
+   (with-input-from-file "./words.txt"
+     (lambda ()
+       (get-string-all (current-input-port))))))
+
+(define (anagram? word1 word2)
+  (let ((l1 (string->list word1))
+        (l2 (string->list word2)))
+    (and (not (equal? l1 l2))
+         (equal? (sort l1 char<?) (sort l2 char<?)))))
+
+(define (count-anagrams word)
+  (fold (lambda (w a)
+          (if (anagram? word w)
+              (1+ a)
+              a))
+        0
+        words))
+
+(let ((input (cdr
+              (string-tokenize
+               (get-string-all (current-input-port))))))
+  (display
+   (string-join
+    (map (compose number->string
+                  count-anagrams)
+         input)))
+  (newline))
